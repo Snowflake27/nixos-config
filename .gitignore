@@ -1,0 +1,31 @@
+## Inizio IDE Jetbrains ##
+# Ignoriamo tutta la cartella, ed aggiungiamo delle eccezioni in base ai file che ci interessano
+/.idea/*
+
+# Scopes comodi per la ricerca
+!/.idea/scopes/
+!/.idea/scopes/*
+
+# Colori associati a file
+!/.idea/fileColors.xml
+
+# Istruzioni File Watcher
+!/.idea/watcherTasks.xml
+
+# Schema JSON
+!/.idea/jsonSchemas.xml
+
+#### PHPStorm
+
+# Configurazione PHP
+!/.idea/php.xml
+
+## Fine IDE Jetbrains ##
+
+## Python Virtual Environment ##
+/.venv/*/
+/.venv/*
+
+## Python Cache ##
+**/__pycache__/
+**/*.pyc
