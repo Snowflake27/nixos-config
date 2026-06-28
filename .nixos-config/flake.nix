@@ -7,6 +7,8 @@
 
     outputs = { self, nixpkgs, ... }@inputs:
     let
+        configPath = "/etc/nixos/flake-config";
+
         coreModules = [
             ./modules/core.nix
         ];
@@ -15,6 +17,11 @@
             # VM Settings
             vm-virtualbox = nixpkgs.lib.nixosSystem {
                 system = "x86_64-linux";
+
+                specialArgs = {
+                    inherit configPath;
+                };
+
                 modules = coreModules ++ [
                     # Host setup
                     ./hosts/vm-virtualbox/default.nix

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, configPath, ... }:
 
 {
     # Localization and timezone settings
@@ -46,6 +46,6 @@
 
 	# Core Aliases
 	environment.shellAliases = {
-		nix-switch = "sudo nixos-rebuild switch --flake /etc/nixos/flake-config#vm-virtualbox";
+		nix-switch = "sudo nixos-rebuild switch --flake ${configPath}#vm-virtualbox";
 	};
 }
