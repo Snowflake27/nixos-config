@@ -22,15 +22,22 @@ in
 		];
 	};
 
-	programs.zsh = {
-		ohMyZsh = {
+	programs = {
+		zsh = {
+			ohMyZsh = {
+				enable = true;
+				plugins = [
+					"colored-man-pages"
+					"git"
+					"git-prompt"
+					"sudo"
+				];
+			};
+		};
+
+		pay-respects = {
 			enable = true;
-			plugins = [
-				"colored-man-pages"
-				"git"
-				"git-prompt"
-				"sudo"
-			];
+			aiIntegration = false;
 		};
 	};
 
