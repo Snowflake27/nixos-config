@@ -44,6 +44,15 @@
 	# (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
 	system.stateVersion = "26.05";
 
+	# Shell setup
+	programs.zsh = {
+		enable = true;
+		enableCompletion = true;
+	    enableBashCompletion = true;
+	    autosuggestions.enable = true;
+	    syntaxHighlighting.enable = true;
+	};
+
 	# Core functions
 	environment.interactiveShellInit = ''
 		nix-switch() {

@@ -1,5 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
+let
+	ezaAliases = import ./aliases/eza.nix { };
+in
 {
 	# Account definition
 	users.users."snowflake" = {
@@ -9,10 +12,27 @@
 
 		packages = with pkgs; [
 			kdePackages.kate
+			eza
 		];
+
+		shell = pkgs.zsh;
 
 		openssh.authorizedKeys.keyFiles = [
 			./keys/ssh/vm_ssh_pub_access_key
 		];
 	};
+
+	programs.zsh = {
+		ohMyZsh = {
+			enable = true;
+			plugins = [
+				"colored-man-pages"
+				"git"
+				"git-prompt"
+				"sudo"
+			];
+		};
+	};
+
+	environment.shellAliases = ezaAliases;
 }
