@@ -2,7 +2,7 @@
 
 {
 	# Group to assign to users allowed to use SSH
-	users.groups.ssh-users = {};
+	users.groups.ssh_users = {};
 
 	# OpenSSH setup
 	services.openssh = {
