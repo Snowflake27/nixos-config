@@ -1,4 +1,4 @@
-{ pkgs, configPath, ... }:
+{ pkgs, config, configPath, ... }:
 
 {
     # Localization and timezone settings
@@ -44,8 +44,21 @@
 	# (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
 	system.stateVersion = "26.05";
 
-	# Core Aliases
-	environment.shellAliases = {
-		nix-switch = "sudo nixos-rebuild switch --flake ${configPath}#vm-virtualbox";
-	};
+	# Core functions
+	environment.interactiveShellInit = ''
+		nix-switch() {
+            if [ -z "$1" ]; then
+				echo "Usage: nix-switch <config-name>"
+				echo ""
+				echo "Defined configurations in the Flake file:"
+
+				nix eval --json "${configPath}"#nixosConfigurations --apply "builtins.attrNames" | \
+				${pkgs.jq}/bin/jq -r '.[]' | sed 's/^/  - /'
+
+				return 1
+            fi
+
+			sudo nixos-rebuild switch --flake ${configPath}#"$1"
+        }
+    '';
 }
