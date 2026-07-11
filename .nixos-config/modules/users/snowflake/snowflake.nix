@@ -35,6 +35,14 @@ in
 			};
 		};
 
+		starship = {
+			enable = true;
+
+			presets = [
+				"nerd-font-symbols"
+			];
+		};
+
 		pay-respects = {
 			enable = true;
 			aiIntegration = false;
