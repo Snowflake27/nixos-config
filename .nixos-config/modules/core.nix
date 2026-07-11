@@ -1,5 +1,13 @@
-{ pkgs, config, configPath, ... }:
+{ pkgs, config, configPath, lib, ... }:
 
+let
+	# Add all scripts to the init dynamically
+	scriptsDir = ./scripts/shell-init;
+	folderContents = builtins.attrNames (builtins.readDir scriptsDir);
+
+	allFiles = map (fileName: scriptsDir + "/${fileName}") folderContents;
+	combinedShellInit = builtins.concatStringsSep "\n" (map builtins.readFile allFiles);
+in
 {
     # Localization and timezone settings
     time.timeZone = "Europe/Rome";
@@ -53,21 +61,17 @@
 	    syntaxHighlighting.enable = true;
 	};
 
+	environment.systemPackages = [ pkgs.jq ];
+
 	# Core functions
-	environment.interactiveShellInit = ''
-		nix-switch() {
-            if [ -z "$1" ]; then
-				echo "Usage: nix-switch <config-name>"
-				echo ""
-				echo "Defined configurations in the Flake file:"
+	environment.interactiveShellInit = combinedShellInit;
 
-				nix eval --json "${configPath}"#nixosConfigurations --apply "builtins.attrNames" | \
-				${pkgs.jq}/bin/jq -r '.[]' | sed 's/^/  - /'
+	# Nix Garbage collector
+	nix.gc = {
+		automatic = true;
+		dates = "weekly";
+		options = "--delete-older-than 30d";
+	};
 
-				return 1
-            fi
-
-			sudo nixos-rebuild switch --flake ${configPath}#"$1"
-        }
-    '';
+	nix.settings.auto-optimise-store = true;
 }
