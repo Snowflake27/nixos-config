@@ -38,9 +38,9 @@ in
 		starship = {
 			enable = true;
 
-			presets = [
-				"nerd-font-symbols"
-			];
+			presets = [];
+
+			settings = builtins.fromTOML (builtins.readFile ./configs/starship.toml);
 		};
 
 		pay-respects = {

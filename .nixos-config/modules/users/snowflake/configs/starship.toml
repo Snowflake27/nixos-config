@@ -1,0 +1,35 @@
+# Starship prompt setup
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Config
+add_newline = true
+
+format = """
+[╭──[$username](bg:snow_dark)[$hostname](bg:snow_dark fg:snow_bright)──](fg:snow_dark)
+[│](fg:snow_dark)
+[╰─](fg:snow_dark) [](fg:snow_bright)
+"""
+
+palette = "everforest"
+
+[palettes.everforest]
+# H: 134
+green_dark   = "#374C3C" # S: 16    L: 25.7
+green_bright = "#83C091" # S: 32.6  L: 63.3
+
+# H: 359
+red_dark   = "#4c3737"
+red_bright = "#c08384"
+
+# H: 179
+snow_dark   = "#374c4c"
+snow_bright = "#83c0bf"
+
+[username]
+format = "[$user@]($style)"
+style_root = 'fg:red_bright bg:snow_dark'
+style_user = 'fg:snow_bright bg:snow_dark'
+
+[hostname]
+format = "$hostname"
+
