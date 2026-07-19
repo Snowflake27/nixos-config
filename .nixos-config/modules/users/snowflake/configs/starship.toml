@@ -5,7 +5,7 @@
 add_newline = true
 
 format = """
-[╭──[$username](bg:snow_dark)[$hostname](bg:snow_dark fg:snow_bright)──](fg:snow_dark)
+[╭──[$username](bg:snow_dark)[$hostname](bg:snow_dark fg:snow_bright)─$directory─$fill$time──╮](fg:snow_dark)
 [│](fg:snow_dark)
 [╰─](fg:snow_dark) [](fg:snow_bright)
 """
@@ -13,17 +13,24 @@ format = """
 palette = "everforest"
 
 [palettes.everforest]
-# H: 134
-green_dark   = "#374C3C" # S: 16    L: 25.7
-green_bright = "#83C091" # S: 32.6  L: 63.3
+# H: 19
+orange_bright = "#fa986a"
 
-# H: 359
-red_dark   = "#4c3737"
-red_bright = "#c08384"
+# H: 40
+yellow_dark   = "#5f4b25"
+yellow_bright = "#faca6a"
+
+# H: 134
+green_dark   = "#374C3C"
+green_bright = "#83C091"
 
 # H: 179
 snow_dark   = "#374c4c"
 snow_bright = "#83c0bf"
+
+# H: 359
+red_dark   = "#4c3737"
+red_bright = "#fa6a6d"
 
 [username]
 format = "[$user@]($style)"
@@ -32,4 +39,30 @@ style_user = 'fg:snow_bright bg:snow_dark'
 
 [hostname]
 format = "$hostname"
+
+[fill]
+symbol = "─"
+style  = "fg:snow_dark"
+
+[character]
+success_symbol = ""
+error_symbol = ""
+root_symbol = ""
+
+success_style = "fg:snow_bright"
+error_style   = "fg:red_bright"
+
+[directory]
+format = "[[$read_only$path]($style)]($read_only_style)"
+style  = "fg:yellow_bright bg:snow_dark"
+
+read_only = "󱪨 "
+read_only_style = "fg:red_bright bg:snow_dark"
+
+[time]
+disabled = false
+format = "[$time]($style)"
+style  = "fg:orange_bright bg:snow_dark"
+time_format = "%a %d %b %R"
+
 
