@@ -8,7 +8,7 @@ format = """
 $cmd_duration
 [╭──[$username](bg:snow_dark)[$hostname](bg:snow_dark fg:snow_bright)─$directory─$fill$time──╮](fg:snow_dark)
 [│](fg:snow_dark)$blank_fill[│](fg:snow_dark)
-[╰─](fg:snow_dark) $character
+[╰─](fg:snow_dark) $sudo$character
 """
 
 right_format = """
@@ -65,6 +65,13 @@ style  = "fg:snow_dark"
 [character]
 success_symbol = "[](fg:snow_bright)"
 error_symbol   = "[](fg:red_bright)"
+
+[sudo]
+disabled = false
+
+format = "[$symbol]($style)"
+symbol = " "
+style  = "fg:orange_bright"
 
 [directory]
 format = "[[$read_only$path]($style)]($read_only_style)"
