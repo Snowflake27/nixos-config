@@ -5,6 +5,7 @@
 add_newline = true
 
 format = """
+$cmd_duration
 [╭──[$username](bg:snow_dark)[$hostname](bg:snow_dark fg:snow_bright)─$directory─$fill$time──╮](fg:snow_dark)
 [│](fg:snow_dark)$blank_fill[│](fg:snow_dark)
 [╰─](fg:snow_dark) $character
@@ -32,26 +33,38 @@ green_bright = "#83C091"
 snow_dark   = "#374c4c"
 snow_bright = "#83c0bf"
 
+# H: 271
+violet_dark   = "#43255f"
+violet_bright = "#ae7fdb"
+
 # H: 359
 red_dark   = "#4c3737"
 red_bright = "#fa6a6d"
 
+[cmd_duration]
+show_notifications = true
+
+format = """
+    [┌───────────────────────────────┐](fg:violet_bright)
+    [  󱦟 Duration: $duration          ](fg:violet_bright)
+    [└───────────────────────────────┘](fg:violet_bright)
+"""
+
 [username]
-format = "[$user@]($style)"
+format = "[$user]($style)"
 style_root = 'fg:red_bright bg:snow_dark'
 style_user = 'fg:snow_bright bg:snow_dark'
 
 [hostname]
-format = "$hostname"
+format = "@$hostname"
 
 [fill]
 symbol = "─"
 style  = "fg:snow_dark"
 
 [character]
-success_symbol = "[](fg:snow_bright) "
-error_symbol   = "[](fg:red_bright) "
-root_symbol    = "[](fg:orange_bright) "
+success_symbol = "[](fg:snow_bright)"
+error_symbol   = "[](fg:red_bright)"
 
 [directory]
 format = "[[$read_only$path]($style)]($read_only_style)"
