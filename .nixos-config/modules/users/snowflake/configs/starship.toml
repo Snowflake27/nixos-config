@@ -11,7 +11,7 @@ format = """
 """
 
 right_format = """
-[─$battery──┘](fg:snow_dark)
+[─](fg:snow_dark)$battery[](fg:snow_dark)$shell$os[──┘](fg:snow_dark)
 """
 
 palette = "everforest"
@@ -49,27 +49,46 @@ symbol = "─"
 style  = "fg:snow_dark"
 
 [character]
-success_symbol = ""
-error_symbol = ""
-root_symbol = ""
-
-success_style = "fg:snow_bright"
-error_style   = "fg:red_bright"
+success_symbol = "[](fg:snow_bright) "
+error_symbol   = "[](fg:red_bright) "
+root_symbol    = "[](fg:orange_bright) "
 
 [directory]
 format = "[[$read_only$path]($style)]($read_only_style)"
 style  = "fg:yellow_bright bg:snow_dark"
 
-read_only = "󱪨 "
+read_only       = "󱪨 "
 read_only_style = "fg:red_bright bg:snow_dark"
 
 [time]
-disabled = false
-format = "[$time]($style)"
-style  = "fg:orange_bright bg:snow_dark"
+disabled    = false
+format      = "[$time]($style)"
+style       = "fg:orange_bright bg:snow_dark"
 time_format = "%a %d %b %R"
 
 [battery]
-format = "[](fg:snow_dark)[$symbol$percentage]($style)[](fg:snow_dark)"
+format = "[](fg:snow_dark)[$symbol$percentage]($style)[─](fg:snow_dark)"
 
+[[battery.display]]
+threshold = 20
+style     = "fg:orange_bright bg:snow_dark"
 
+[shell]
+disabled = false
+format   = "[$indicator ]($style)"
+style    = "fg:snow_bright bg:snow_dark"
+
+[os]
+disabled = false
+format   = "[on $symbol$name $version]($style)"
+style    = "fg:snow_bright bg:snow_dark"
+
+[os.symbols]
+AlmaLinux = " "
+Android = " "
+CachyOS = " "
+Fedora = " "
+NixOS = " "
+RockyLinux = " "
+Ubuntu = " "
+Windows = " "
