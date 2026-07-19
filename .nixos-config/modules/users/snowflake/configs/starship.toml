@@ -6,8 +6,12 @@ add_newline = true
 
 format = """
 [╭──[$username](bg:snow_dark)[$hostname](bg:snow_dark fg:snow_bright)─$directory─$fill$time──╮](fg:snow_dark)
-[│](fg:snow_dark)
-[╰─](fg:snow_dark) [](fg:snow_bright)
+[│](fg:snow_dark)$blank_fill[│](fg:snow_dark)
+[╰─](fg:snow_dark) $character
+"""
+
+right_format = """
+[─$battery──┘](fg:snow_dark)
 """
 
 palette = "everforest"
@@ -64,5 +68,8 @@ disabled = false
 format = "[$time]($style)"
 style  = "fg:orange_bright bg:snow_dark"
 time_format = "%a %d %b %R"
+
+[battery]
+format = "[](fg:snow_dark)[$symbol$percentage]($style)[](fg:snow_dark)"
 
 
