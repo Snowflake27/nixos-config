@@ -77,6 +77,10 @@ in
 			enable = true;
 			aiIntegration = false;
 		};
+
+		git = {
+			enable = true;
+		};
 	};
 
 	environment.shellAliases = ezaAliases;
