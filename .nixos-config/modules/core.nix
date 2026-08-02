@@ -61,7 +61,14 @@ in
 	    syntaxHighlighting.enable = true;
 	};
 
-	environment.systemPackages = [ pkgs.jq ];
+	environment.systemPackages = with pkgs; [
+		jq
+	];
+
+	programs.nix-index = {
+		enable = true;
+		enableZshIntegration = true;
+	};
 
 	security.sudo-rs = {
 		enable = true;

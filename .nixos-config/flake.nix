@@ -3,14 +3,19 @@
 
     inputs = {
         nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+        # Nix community database, for `nix-index`
+        nix-index-database.url = "github:nix-community/nix-index-database";
+        nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    outputs = { self, nixpkgs, ... }@inputs:
+    outputs = { self, nixpkgs, nix-index-database, ... }@inputs:
     let
         configPath = "/etc/nixos/flake-config";
 
         coreModules = [
             ./modules/core.nix
+            nix-index-database.nixosModules.nix-index
         ];
     in {
         nixosConfigurations = {

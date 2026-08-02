@@ -22,21 +22,8 @@ nix-switch() {
 	print-separator
 	print-decorated-message "󱄅 " "Nixos config build completed" "$COLOR_SUCCESS"
 
-	source /etc/profile
-	print-decorated-message "󰈮 " "Shell profile sourced" "$COLOR_INFO"
-
 	# If you're using zsh, reload its config
 	if [ -n "$ZSH_VERSION" ]; then
-		if [ -f /etc/zshrc ]; then
-			source /etc/zshrc
-			print-decorated-message "󰈮 " "Zsh profile sourced" "$COLOR_INFO"
-		fi
-
-		# If starship exists, reload that too
-		if command -v starship >/dev/null; then
-			eval "$(starship init zsh)"
-			print-decorated-message " " "Starship reloaded" "$COLOR_INFO"
-		fi
+		exec zsh
 	fi
-
 }
