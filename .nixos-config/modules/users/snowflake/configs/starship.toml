@@ -83,10 +83,10 @@ symbol = " "
 style  = "fg:orange_bright"
 
 [directory]
-format = "[[$read_only$path]($style)]($read_only_style)"
+format = "[[$read_only]($read_only_style)  $path]($style)"
 style  = "fg:yellow_bright bg:snow_dark"
 
-read_only       = "󱪨 "
+read_only       = "󰉐 "
 read_only_style = "fg:red_bright bg:snow_dark"
 
 [time]
