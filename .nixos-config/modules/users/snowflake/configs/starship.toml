@@ -7,12 +7,13 @@ add_newline = true
 format = """
 $cmd_duration
 [╭──[$username](bg:snow_dark)[$hostname](bg:snow_dark fg:snow_bright)─$directory─$fill$time──╮](fg:snow_dark)
+([│](fg:snow_dark)  $vcs[│](fg:snow_dark)\n)\
 [│](fg:snow_dark)$blank_fill[│](fg:snow_dark)
 [╰─](fg:snow_dark) $sudo$character
 """
 
 right_format = """
-[─](fg:snow_dark)$battery[](fg:snow_dark)$shell$os[──┘](fg:snow_dark)
+[─](fg:snow_dark)$battery[](fg:snow_dark)$shell$os[──╯](fg:snow_dark)
 """
 
 palette = "everforest"
@@ -33,9 +34,17 @@ green_bright = "#83C091"
 snow_dark   = "#374c4c"
 snow_bright = "#83c0bf"
 
+# H: 223
+blue_dark   = "#2f3b5a"
+blue_bright = "#6f8cd3"
+
 # H: 271
 violet_dark   = "#43255f"
 violet_bright = "#ae7fdb"
+
+# H: 325
+pink_dark   = "#5e3f51"
+pink_bright = "#f58bc9"
 
 # H: 359
 red_dark   = "#4c3737"
@@ -112,3 +121,36 @@ NixOS = " "
 RockyLinux = " "
 Ubuntu = " "
 Windows = " "
+
+# Git configuration
+[vcs]
+order = ["git"]
+git_modules = "$git_branch$git_status$git_state  $git_metrics$blank_fill"
+
+[git_state]
+format = ":[$state($progress_current/$progress_total)](fg:yellow_bright)"
+
+[git_branch]
+format = "Git branch: [$symbol$branch(:$remote_branch)](fg:violet_bright)"
+
+[git_metrics]
+disabled = false
+format   = "Changes to commit: ([+$added ]($added_style))([-$deleted]($deleted_style))"
+
+only_nonzero_diffs = false
+added_style   = "fg:green_bright"
+deleted_style = "fg:red_bright"
+
+[git_status]
+format = "$all_status$ahead_behind"
+
+conflicted = "[ ](fg:red_bright)"
+ahead      = "[](fg:green_bright)"
+behind     = "[](fg:blue_bright)"
+diverged   = "[󰹹](fg:orange_bright)"
+untracked  = "[󱀶](fg:pink_bright)"
+stashed    = "[ ](fg:violet_bright)"
+modified   = "[󰩌 ](fg:yellow_bright)"
+staged     = "[](fg:green_bright)"
+renamed    = "[󱪔](fg:blue_bright)"
+deleted    = "[󱀷](fg:red_bright)"
