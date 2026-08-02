@@ -63,6 +63,10 @@ in
 
 	environment.systemPackages = [ pkgs.jq ];
 
+	security.sudo-rs = {
+		enable = true;
+	};
+
 	# Core functions
 	environment.interactiveShellInit = combinedShellInit;
 
