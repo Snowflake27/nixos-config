@@ -8,7 +8,7 @@ format = """
 $cmd_duration
 [╭──[$username](bg:snow_dark)[$hostname](bg:snow_dark fg:snow_bright)─$directory─$fill$time──╮](fg:snow_dark)
 ([│](fg:snow_dark)  $vcs[│](fg:snow_dark)\n)\
-[│](fg:snow_dark)$blank_fill[│](fg:snow_dark)
+([│](fg:snow_dark)  ${env_var.FLAKE_CONFIG}$blank_fill[│](fg:snow_dark)\n)\
 [╰─](fg:snow_dark) $sudo$character
 """
 
@@ -121,6 +121,12 @@ NixOS = " "
 RockyLinux = " "
 Ubuntu = " "
 Windows = " "
+
+[env_var.FLAKE_CONFIG]
+variable = "NIX_CURRENT_FLAKE_CONFIG"
+symbol = " "
+format = "Nix Flake: [$symbol$env_value]($style)"
+style  = "fg:snow_bright"
 
 # Git configuration
 [vcs]
