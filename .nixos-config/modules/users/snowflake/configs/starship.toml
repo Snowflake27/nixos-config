@@ -124,7 +124,7 @@ Windows = " "
 
 [env_var.FLAKE_CONFIG]
 variable = "NIX_CURRENT_FLAKE_CONFIG"
-symbol = " "
+symbol = "  "
 format = "Nix Flake: [$symbol$env_value]($style)"
 style  = "fg:snow_bright"
 
@@ -145,7 +145,9 @@ git_modules = "$git_branch$git_status$git_state  $git_metrics$blank_fill"
 format = ":[$state($progress_current/$progress_total)](fg:yellow_bright)"
 
 [git_branch]
-format = "Git branch: [$symbol$branch(:$remote_branch)](fg:violet_bright)"
+format = "Git branch: [$symbol$branch(:$remote_branch)]($style)"
+style  = "fg:violet_bright"
+symbol = ' '
 
 [git_metrics]
 disabled = false
