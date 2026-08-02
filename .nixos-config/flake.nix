@@ -34,6 +34,7 @@
 
                     # Add all needed software
 					./modules/apps/development/python-uv.nix
+					./modules/apps/development/node-fnm.nix
 
                     # Set up my admin user
                     ./modules/users/snowflake/snowflake.nix
