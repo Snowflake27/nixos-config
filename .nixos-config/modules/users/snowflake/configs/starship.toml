@@ -8,7 +8,7 @@ format = """
 $cmd_duration
 [╭──[$username](bg:snow_dark)[$hostname](bg:snow_dark fg:snow_bright)─$directory─$fill$time──╮](fg:snow_dark)
 ([│](fg:snow_dark)  $vcs[│](fg:snow_dark)\n)\
-([│](fg:snow_dark)  ${env_var.FLAKE_CONFIG}$blank_fill[│](fg:snow_dark)\n)\
+([│](fg:snow_dark)  ${env_var.FLAKE_CONFIG}  $python$blank_fill[│](fg:snow_dark)\n)\
 [╰─](fg:snow_dark) $sudo$character
 """
 
@@ -127,6 +127,14 @@ variable = "NIX_CURRENT_FLAKE_CONFIG"
 symbol = " "
 format = "Nix Flake: [$symbol$env_value]($style)"
 style  = "fg:snow_bright"
+
+# Dev tools
+[python]
+format = "Python: [$symbol$version]($style)"
+symbol = " "
+style  = "fg:green_bright"
+
+python_binary = [['uv', 'run', '--no-python-downloads', '--no-project', 'python'], 'python3', 'python']
 
 # Git configuration
 [vcs]
