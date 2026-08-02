@@ -26,4 +26,9 @@
 		device = "shared";
 		options = [ "rw" "uid=1000" "gid=100" "nofail" ];
 	};
+
+	# Set up an env variable with the configuration name
+	environment.sessionVariables = {
+		NIX_CURRENT_FLAKE_CONFIG = "vm-virtualbox";
+	};
 }
