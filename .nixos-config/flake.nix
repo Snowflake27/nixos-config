@@ -26,11 +26,14 @@
                     # Host setup
                     ./hosts/vm-virtualbox/default.nix
 
-                    # Add plasma
+                    # Add desktop environment
                     ./modules/desktop/plasma/plasma.nix
 
-                    # Add SSH
+                    # Add all servers
                     ./modules/servers/ssh.nix
+
+                    # Add all needed software
+					./modules/apps/development/python-uv.nix
 
                     # Set up my admin user
                     ./modules/users/snowflake/snowflake.nix
