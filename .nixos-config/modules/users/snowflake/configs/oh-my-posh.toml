@@ -1,0 +1,49 @@
+"$schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json"
+version = 4
+final_space = true
+terminal_background = "#272e33"
+accent_color = "#d3c6aa"
+
+[[blocks]]
+type = "prompt"
+alignment = "left"
+
+  [[blocks.segments]]
+  type = "text"
+  style = "plain"
+  powerline_symbol = ""
+  template = "╭──"
+  foreground = ""
+
+[palette]
+# H: 19
+orange_bright = "#fa986a"
+orange_dark = "#5e493f"
+
+# H: 40
+yellow_dark   = "#5f4b25"
+yellow_bright = "#faca6a"
+
+# H: 134
+green_dark   = "#374C3C"
+green_bright = "#83C091"
+
+# H: 179
+snow_dark   = "#374c4c"
+snow_bright = "#83c0bf"
+
+# H: 223
+blue_dark   = "#2f3b5a"
+blue_bright = "#6f8cd3"
+
+# H: 271
+violet_dark   = "#43255f"
+violet_bright = "#ae7fdb"
+
+# H: 325
+pink_dark   = "#5e3f51"
+pink_bright = "#f58bc9"
+
+# H: 359
+red_dark   = "#4c3737"
+red_bright = "#fa6a6d"

@@ -80,6 +80,10 @@ in
 	# Core functions
 	environment.interactiveShellInit = combinedShellInit;
 
+	environment.sessionVariables = {
+		FLAKE_CONFIG_PATH = configPath;
+	};
+
 	# Nix Garbage collector
 	nix.gc = {
 		automatic = true;
