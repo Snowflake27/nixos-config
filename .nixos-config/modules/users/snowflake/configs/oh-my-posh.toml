@@ -1,19 +1,167 @@
 "$schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json"
 version = 4
 final_space = true
-terminal_background = "#272e33"
-accent_color = "#d3c6aa"
 
 [[blocks]]
 type = "prompt"
 alignment = "left"
 
-  [[blocks.segments]]
-  type = "text"
-  style = "plain"
-  powerline_symbol = ""
-  template = "╭──"
-  foreground = ""
+	[[blocks.segments]]
+	type = "executiontime"
+	style = "plain"
+	template = """
+	     {{$str := printf " 󱦟 Duration: %s" .FormattedMs}}\
+	     {{$len := len $str}}\
+	     ┌{{ printf "%*s" $len "" | replace " " "─"}}┐
+	     │ {{$str}}  │
+	     └{{ printf "%*s" $len "" | replace " " "─"}}┘\
+	    """
+	foreground = "p:violet_bright"
+
+		[blocks.segments.options]
+		style = "roundrock"
+
+
+# Line 1
+[[blocks]]
+type = "prompt"
+alignment = "left"
+
+	[[blocks.segments]]
+	type = "text"
+	style = "plain"
+	powerline_symbol = ""
+	template = "\n╭──"
+	foreground = "p:snow_dark"
+
+	[[blocks.segments]]
+	type = "session"
+	style = "diamond"
+	powerline_symbol = ""
+	template = "{{ .UserName }}@{{ .HostName }}"
+	foreground = "p:snow_bright"
+	background = "p:snow_dark"
+	leading_diamond = ""
+	trailing_diamond = ""
+
+	[[blocks.segments]]
+	type = "text"
+	style = "plain"
+	foreground = "p:snow_dark"
+	template = "─"
+
+	[[blocks.segments]]
+	type = "path"
+	style = "diamond"
+	template = " {{ if not .Writable }}󰉐 {{ else }} {{ end }} {{ .Path }} "
+
+	foreground = "p:yellow_bright"
+	foreground_templates = [
+		"{{ if not .Writable }}p:red_bright{{ end }}"
+	]
+	background = "p:snow_dark"
+	leading_diamond = ""
+	trailing_diamond = ""
+
+	mixed_threshold = 5
+
+		[[blocks.segment.options]]
+		style = "mixed"
+
+
+[[blocks]]
+type = "prompt"
+alignment = "right"
+filler = "<p:snow_dark>─"
+
+	[[blocks.segments]]
+	type = "time"
+	style = "diamond"
+	background = "p:snow_dark"
+	foreground = "p:orange_bright"
+	template = " {{ .CurrentDate | date \"Mon 02 Jan 15:04\" }} "
+	leading_diamond = ""
+	trailing_diamond = ""
+
+	[[blocks.segments]]
+	type = "text"
+	style = "plain"
+	foreground = "p:snow_dark"
+	template = "──╮"
+
+# Line 2
+[[blocks]]
+type = "prompt"
+alignment = "left"
+newline = true
+
+	[[blocks.segments]]
+	type = "git"
+	style = "plain"
+
+	template = """
+	<p:snow_dark>│</>  Repository Git: <p:orange_bright>\
+	  {{ if .UpstreamURL}}{{url .RepoName .UpstreamURL}}{{ else }}{{ .RepoName }}{{end}}</>  \
+	  Branch: <p:purple_bright>{{ .HEAD }}</>\
+	"""
+
+	foreground = "#d3c6aa"
+
+		[blocks.segments.options]
+		fetch_status = true
+
+	    [blocks.segments.cache]
+	    duration = "2s"
+	    strategy = "session"
+
+
+[[blocks]]
+type = "prompt"
+alignment = "right"
+filler = " "
+
+	[[blocks.segments]]
+	type = "text"
+	style = "plain"
+	foreground = "p:snow_dark"
+	template = "│"
+
+
+[[blocks]]
+type = "prompt"
+alignment = "left"
+newline = true
+
+	[[blocks.segments]]
+	type = "git"
+	style = "plain"
+
+	template = """
+	<p:snow_dark>│</>  {{ if .UpstreamURL}}Upstream: <p:orange_bright> {{ .Ahead }}</>/<p:blue_bright>{{ .Behind }}</>  {{end}}\
+	  Changed: <p:green_bright>+{{ .Working.Added }}</>/<p:yellow_bright>{{ .Working.Modified }}</>/<p:red_bright>-{{ .Working.Deleted }}</>  \
+	  Staged: <p:green_bright>+{{ .Staging.Added }}</>/<p:yellow_bright>{{ .Staging.Modified }}</>/<p:red_bright>-{{ .Staging.Deleted }}</>\
+	"""
+
+	foreground = "#d3c6aa"
+
+		[blocks.segments.options]
+		fetch_status = true
+
+	    [blocks.segments.cache]
+	    duration = "2s"
+	    strategy = "session"
+
+
+[[blocks]]
+type = "prompt"
+alignment = "right"
+filler = " "
+
+	[[blocks.segments]]
+	type = "text"
+	style = "plain"
+	foreground = "p:snow_dark"
+	template = "│"
 
 [palette]
 # H: 19
@@ -21,29 +169,29 @@ orange_bright = "#fa986a"
 orange_dark = "#5e493f"
 
 # H: 40
-yellow_dark   = "#5f4b25"
+yellow_dark = "#5f4b25"
 yellow_bright = "#faca6a"
 
 # H: 134
-green_dark   = "#374C3C"
+green_dark = "#374C3C"
 green_bright = "#83C091"
 
-# H: 179
-snow_dark   = "#374c4c"
-snow_bright = "#83c0bf"
+# H: 201
+snow_dark = "#304c5b"
+snow_bright = "#d0e2eb"
 
 # H: 223
-blue_dark   = "#2f3b5a"
+blue_dark = "#2f3b5a"
 blue_bright = "#6f8cd3"
 
 # H: 271
-violet_dark   = "#43255f"
+violet_dark = "#43255f"
 violet_bright = "#ae7fdb"
 
 # H: 325
-pink_dark   = "#5e3f51"
+pink_dark = "#5e3f51"
 pink_bright = "#f58bc9"
 
 # H: 359
-red_dark   = "#4c3737"
+red_dark = "#4c3737"
 red_bright = "#fa6a6d"
