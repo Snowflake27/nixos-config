@@ -1,8 +1,3 @@
-### Setup configuration
-FLAKE_CONFIG_PATH="/etc/nixos/flake-config/"
-
-###
-
 ### Error codes
 NIXOS_CONFIG_NOT_SPECIFIED=1
 NIXOS_BUILD_FAIL=10

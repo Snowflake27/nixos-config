@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, configPath, ... }:
 
 let
 	ezaAliases = import ./aliases/eza.nix { };
@@ -20,27 +20,7 @@ in
 		packages = with pkgs; [
 			kdePackages.kate
 			eza
-
-			# Edit starship to include a non-merged PR
-			(pkgs.starship.overrideAttrs (oldAttrs: {
-				# Make sure to apply patches if starship defined any
-				patches = (oldAttrs.patches or []) ++ [
-					(pkgs.fetchpatch {
-						# blank-fill PR 7111
-					    url = "https://github.com/starship/starship/pull/7111.patch";
-
-						# You give it the correct SHA so nixos knows it's safe and not altered
-						sha256 = "sha256-NtPZT9Qu+gtnsGMToHfqUWnKq3N1/WSaO//kSAvj6rw=";
-					})
-				];
-
-				# Should fix starship build failing because of missing repo
-				postPatch = (oldAttrs.postPatch or "") + ''
-					if [ -f build.rs ]; then
-						sed -i 's/expect("Failed to process filename")/unwrap_or("")/g' build.rs
-					fi
-				'';
-		    }))
+			oh-my-posh
 		];
 
 		shell = pkgs.zsh;
@@ -63,14 +43,6 @@ in
 			};
 
 			interactiveShellInit = combinedShellInit;
-		};
-
-		starship = {
-			enable = true;
-
-			presets = [];
-
-			settings = builtins.fromTOML (builtins.readFile ./configs/starship.toml);
 		};
 
 		pay-respects = {
