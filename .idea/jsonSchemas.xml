@@ -3,6 +3,22 @@
   <component name="JsonSchemaMappingsProjectConfiguration">
     <state>
       <map>
+        <entry key="Oh My Posh">
+          <value>
+            <SchemaInfo>
+              <option name="generatedName" value="New Schema" />
+              <option name="name" value="Oh My Posh" />
+              <option name="relativePathToSchema" value="https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json" />
+              <option name="patterns">
+                <list>
+                  <Item>
+                    <option name="path" value=".nixos-config/modules/users/snowflake/configs/oh-my-posh.toml" />
+                  </Item>
+                </list>
+              </option>
+            </SchemaInfo>
+          </value>
+        </entry>
         <entry key="Starship">
           <value>
             <SchemaInfo>
