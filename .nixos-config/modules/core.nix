@@ -52,6 +52,9 @@ in
 	# (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
 	system.stateVersion = "26.05";
 
+	# Use lix fork
+	nix.package = pkgs.lix;
+
 	# Shell setup
 	programs.zsh = {
 		enable = true;
