@@ -121,7 +121,7 @@ alignment = "right"
 filler = " "
 
 	[[blocks.segments]]
-	type = "text"
+	type = "git"
 	style = "plain"
 	foreground = "p:snow_dark"
 	template = "│"
@@ -158,7 +158,7 @@ alignment = "right"
 filler = " "
 
 	[[blocks.segments]]
-	type = "text"
+	type = "git"
 	style = "plain"
 	foreground = "p:snow_dark"
 	template = "│"
