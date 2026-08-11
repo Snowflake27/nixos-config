@@ -26,6 +26,7 @@ alignment = "left"
 [[blocks]]
 type = "prompt"
 alignment = "left"
+newline = true
 
 	[[blocks.segments]]
 	type = "text"
@@ -63,11 +64,9 @@ alignment = "left"
 	leading_diamond = ""
 	trailing_diamond = ""
 
-	mixed_threshold = 5
-
-		[[blocks.segment.options]]
+		[blocks.segments.options]
 		style = "mixed"
-
+		mixed_threshold = 5
 
 [[blocks]]
 type = "prompt"
@@ -89,11 +88,13 @@ filler = "<p:snow_dark>─"
 	foreground = "p:snow_dark"
 	template = "──╮"
 
+
 # Line 2
 [[blocks]]
 type = "prompt"
 alignment = "left"
 newline = true
+filler = "<p:snow_dark>│</>"
 
 	[[blocks.segments]]
 	type = "git"
@@ -127,6 +128,7 @@ filler = " "
 	template = "│"
 
 
+# Line 3
 [[blocks]]
 type = "prompt"
 alignment = "left"
@@ -162,6 +164,43 @@ filler = " "
 	style = "plain"
 	foreground = "p:snow_dark"
 	template = "│"
+
+
+# Line 4
+[[blocks]]
+type = "prompt"
+alignment = "left"
+newline = true
+
+	[[blocks.segments]]
+	type = "text"
+	style = "plain"
+	foreground = "#d3c6aa"
+
+	template = "{{ if .Env.NIX_CURRENT_FLAKE_CONFIG }}<p:snow_dark>│</>  Nix Flake: <p:snow_bright> {{ .Env.NIX_CURRENT_FLAKE_CONFIG }}  </>{{ end }}"
+
+		[blocks.segments.options]
+		var_name = "NIX_CURRENT_FLAKE_CONFIG"
+
+	[[blocks.segments]]
+	type = "nix-shell"
+	style = "plain"
+	foreground = "#d3c6aa"
+
+	template = "{{ if not .Env.NIX_CURRENT_FLAKE_CONFIG }}<p:snow_dark>│</>  {{ end }}Nix Shell: <p:snow_bright> {{ if .Env.name }}{{ .Env.name }}:{{end}}</><p:orange_bright>{{ .Type }}  </>"
+
+
+[[blocks]]
+type = "prompt"
+alignment = "right"
+filler = " "
+
+	[[blocks.segments]]
+	type = "text"
+	style = "plain"
+	foreground = "p:snow_dark"
+	template = "{{ if or .Env.NIX_CURRENT_FLAKE_CONFIG .Env.IN_NIX_SHELL .Env.name .Env.NIX_SHELL_PACKAGES }}│{{ end }}"
+
 
 [palette]
 # H: 19
