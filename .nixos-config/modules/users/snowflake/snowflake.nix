@@ -21,6 +21,7 @@ in
 			kdePackages.kate
 			eza
 			oh-my-posh
+			any-nix-shell
 		];
 
 		shell = pkgs.zsh;
