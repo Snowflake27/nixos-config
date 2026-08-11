@@ -187,7 +187,7 @@ newline = true
 	style = "plain"
 	foreground = "#d3c6aa"
 
-	template = "{{ if not .Env.NIX_CURRENT_FLAKE_CONFIG }}<p:snow_dark>│</>  {{ end }}Nix Shell: <p:snow_bright> {{ if .Env.name }}{{ .Env.name }}:{{end}}</><p:orange_bright>{{ .Type }}  </>"
+	template = "{{ if not .Env.NIX_CURRENT_FLAKE_CONFIG }}<p:snow_dark>│</>  {{ end }}Nix Shell: <p:snow_bright> {{ if .Env.name }}{{ .Env.name }}:{{end}}</><p:red_bright>{{ .Type }}  </>"
 
 
 [[blocks]]
@@ -200,6 +200,80 @@ filler = " "
 	style = "plain"
 	foreground = "p:snow_dark"
 	template = "{{ if or .Env.NIX_CURRENT_FLAKE_CONFIG .Env.IN_NIX_SHELL .Env.name .Env.NIX_SHELL_PACKAGES }}│{{ end }}"
+
+
+# Line 5
+[[blocks]]
+type = "prompt"
+alignment = "left"
+newline = true
+
+	[[blocks.segments]]
+	type = "python"
+	style = "plain"
+	foreground = "#d3c6aa"
+
+	template = "<p:snow_dark>│</>  {{ if .Venv }}Python env: <p:violet_bright>󱧼 {{ .Venv }}  </>{{end}}Python version: <p:green_bright> {{ .Full }}  </>"
+
+		[blocks.segments.options]
+	    fetch_virtual_env = true
+		display_mode = "context"
+		tooling = ['uv', 'python3', 'python']
+
+	    [blocks.segments.cache]
+	    duration = "1m"
+	    strategy = "folder"
+
+	[[blocks.segments]]
+	type = "node"
+	style = "plain"
+	foreground = "#d3c6aa"
+
+	template = "Node version: <p:orange_bright>{{ .Full }}{{if .PackageManagerIcon }} on {{ .PackageManagerIcon }} {{ .PackageManagerName }}{{end}}  </>"
+
+		[blocks.segments.options]
+		display_mode = "context"
+		fetch_package_manager = true
+
+		[blocks.segments.cache]
+	    duration = "1m"
+	    strategy = "folder"
+
+	[[blocks.segments]]
+	type = "php"
+	style = "plain"
+	foreground = "#d3c6aa"
+
+	template = "PHP version: <p:blue_bright>  {{if .Full}}{{ .Full }}{{else}}<p:red_bright>Not found</>{{end}}</>  "
+
+		[blocks.segments.options]
+		display_mode = "context"
+
+		[blocks.segments.cache]
+	    duration = "1m"
+	    strategy = "folder"
+
+
+[[blocks]]
+type = "prompt"
+alignment = "right"
+filler = " "
+
+	[[blocks]]
+	type = "prompt"
+	alignment = "right"
+	filler = " "
+
+		[[blocks.segments]]
+		type = "text"
+		style = "plain"
+		foreground = "p:snow_dark"
+		template = """\
+			{{ if or .Env.VIRTUAL_ENV .Env.NODE_VERSION .Env.PHP_VERSION \
+			(glob "*.py") (glob ".venv") (glob "pyproject.toml") \
+			(glob "package.json") (glob "composer.json") (glob "*.php") \
+			}}│{{ end }}\
+		"""
 
 
 [palette]
