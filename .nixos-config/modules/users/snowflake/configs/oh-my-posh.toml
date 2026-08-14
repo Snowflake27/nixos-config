@@ -249,10 +249,6 @@ newline = true
 		[blocks.segments.options]
 		display_mode = "context"
 
-		[blocks.segments.cache]
-	    duration = "1m"
-	    strategy = "folder"
-
 
 [[blocks]]
 type = "prompt"
@@ -274,6 +270,114 @@ filler = " "
 			(glob "package.json") (glob "composer.json") (glob "*.php") \
 			}}│{{ end }}\
 		"""
+
+# Final Line
+[[blocks]]
+type = "prompt"
+alignment = "left"
+newline = true
+
+	[[blocks.segments]]
+	type = "text"
+	style = "plain"
+	template = "╰─ "
+	foreground = "p:snow_dark"
+
+	[[blocks.segments]]
+	type = "text"
+	style = "plain"
+	foreground = "p:orange_bright"
+
+	template = " "
+
+	[[blocks.segments]]
+	type = "status"
+	style = "plain"
+
+	template = "{{ if eq .Code 0 }}<p:green_bright></>{{ else }}{{ end }}"
+	foreground = "p:red_bright"
+
+		[blocks.segments.options]
+		always_enabled = true
+
+[[blocks]]
+type = "rprompt"
+alignment = "right"
+
+	[[blocks.segments]]
+	type = "text"
+	style = "plain"
+	template = "─"
+	foreground = "p:snow_dark"
+
+	[[blocks.segments]]
+	type = "battery"
+	style = "diamond"
+
+	leading_diamond = ""
+	trailing_diamond = ""
+	background = "p:snow_dark"
+	foreground = "p:green_bright"
+	foreground_templates = [
+	  "{{ if eq \"Charging\" .State.String }}p:blue_bright{{ end }}",
+	  "{{ if le .Percentage 15 }}p:red_bright{{ end }}",
+	  "{{ if le .Percentage 30 }}p:orange_bright{{ end }}",
+	  "{{ if le .Percentage 40 }}p:yellow_bright{{ end }}"
+	]
+
+	template = " {{ if not .Error }}{{ .Icon }} {{ .Percentage }}%{{ end }}"
+
+		[blocks.segments.options]
+		charging_icon = "󱊥 "
+		discharging_icon = "󰂎 "
+		charged_icon = "󱊦 "
+
+		display_error = false
+
+	[[blocks.segments]]
+	type = "battery"
+	style = "plain"
+	foreground = "p:snow_dark"
+	template = "{{ if not .Error }}─{{end}}"
+
+		[blocks.segments.options]
+		display_error = false
+
+	[[blocks.segments]]
+	type = "shell"
+	style = "diamond"
+	foreground = "p:snow_bright"
+	background = "p:snow_dark"
+
+	leading_diamond = ""
+	trailing_diamond = ""
+
+	[[blocks.segments]]
+	type = "os"
+	style = "diamond"
+	foreground = "p:snow_bright"
+	background = "p:snow_dark"
+
+	leading_diamond = ""
+	trailing_diamond = ""
+
+	template = "on {{ .Icon }} "
+
+		[blocks.segments.options]
+		almalinux = " AlmaLinux"
+		android = " Android"
+		cachyos = " CachyOS"
+		fedora = " Fedora"
+		nixos = " NixOS"
+		rocky = " Rocky Linux"
+		ubuntu = " Ubuntu"
+		windows = " Windows"
+
+	[[blocks.segments]]
+	type = "text"
+	style = "plain"
+	template = "──╯"
+	foreground = "p:snow_dark"
 
 
 [palette]
