@@ -1,0 +1,32 @@
+name: Nix Flake CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  check-and-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Nix with Flakes support
+        uses: cachix/install-nix-action@v27
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+
+      - name: Caching Nix Packages
+        uses: DeterminateSystems/magic-nix-cache-action@v7
+
+      - name: Running syntax check
+        run: nix flake check
+
+      - name: Dry build VM setup
+        run: nix build .#nixosConfigurations.vm-virtualbox.config.system.build.toplevel
